@@ -1,4 +1,5 @@
 pipeline {
+    //agent { docker { image 'golang:1.17.5-alpine' } }
     agent any
     parameters {
         choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
@@ -7,7 +8,7 @@ pipeline {
     stages {
         stage("go mod download") {
             steps {
-                
+                sh 'go version'
                 }
             }
         }
