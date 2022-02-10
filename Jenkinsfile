@@ -1,43 +1,43 @@
 pipeline {
-    //agent { docker { image 'golang:1.17.5-alpine' } }
     agent any
-    parameters {
-        choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
-        booleanParam(name: 'executeTests', defaultValue: true, description: '')
+    tools {
+        go 'go'
     }
-    stages {
-        stage("go mod download") {
-            steps {
+    environment {
+        GO117MODULE = 'on'
+        CGO_ENABLED = 0 
+        GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
+    }
+    stages { 
+        stage('Pre Test'){
+            steps{
+                echo 'downloading all the dependencies'
+            
                 sh 'go version'
+                //sh 'go mod download'
+                //or -update
+                //sh 'cd ${GOPATH}/src/cmd/project/ && dep ensure' 
                 }
             }
-        }
-        stage("go build -o <appname>") {
-            steps {
-                
-            }
-        }
-        stage("golangci-lint run -c .golangci.yml") {
-            when {
-                expression {
-                    params.executeTests
+                stage('Build'){
+                    steps{
+                        echo 'build the go app'
+                        //sh 'go build -o <appname>'
+                         }
+                     }
+                stage('Checking'){
+                    steps{
+                        echo 'checking lint issues'
+                        //sh 'golangci-lint run -c .golangci.yml'
+                         }
                 }
-            }
-            steps {
-                
-                }
+                stage('Testing'){
+                    steps{
+                        echo 'running test cases'
+                        //sh 'go test ./test/  -v'
+                        echo 'test cases coverage'
+                        //sh 'go test -cover ./test/'
+                         }   
+                     }  
             }
         }
-        stage("go test ./test/  -v") {
-            steps {
-                
-            }
-        }
-        
-      stage("go test -cover ./test/") {
-            steps {
-               
-            }
-        }  
-    }  
-}
