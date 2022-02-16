@@ -14,7 +14,7 @@ pipeline {
                 echo 'downloading all the dependencies'
             
                 sh 'go version'
-                //sh 'go mod download'
+                sh 'go mod download'
                 //or -update
                 //sh 'cd ${GOPATH}/src/cmd/project/ && dep ensure' 
                 }
