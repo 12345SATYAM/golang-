@@ -1,7 +1,10 @@
 pipeline {
     agent {
-        docker { image 'go:latest' }
-    }
+        docker { 
+            label 'docker'
+            image 'go:latest' 
+                }
+           }
     tools {
         go 'go'
     }
