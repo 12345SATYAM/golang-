@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker { 
-            label 'docker'
+            
             image 'go:latest' 
                 }
            }
