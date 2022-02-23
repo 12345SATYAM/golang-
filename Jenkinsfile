@@ -3,6 +3,7 @@ pipeline {
         docker { 
             
             image 'go:latest' 
+            args '-u root'
                 }
            }
     tools {
