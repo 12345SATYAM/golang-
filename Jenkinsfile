@@ -8,9 +8,7 @@ pipeline {
             
                 }
            }
-    tools {
-        go 'go'
-    }
+
     environment {
         GO117MODULE = 'on'
         CGO_ENABLED = 0 
